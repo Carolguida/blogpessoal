@@ -6,11 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity // Faz com que a classe seja interpretada pelo bd como uma tabela.
@@ -21,7 +23,7 @@ public class Postagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // equivalente ao auto_increment do bd
 	private long id;
 
-	@NotNull 
+	@NotNull
 	@Size(min = 5, max = 100)
 	private String titulo;
 
@@ -33,7 +35,11 @@ public class Postagem {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	// Assim que passar um dado por essa classe, ele capta a data, hora e segundos.
 
-	//Métodos getters and setters
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+
+	// Métodos getters and setters
 	public long getId() {
 		return id;
 	}
@@ -66,6 +72,12 @@ public class Postagem {
 		this.data = data;
 	}
 
+	public Tema getTema() {
+		return tema;
+	}
 
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
 
 }

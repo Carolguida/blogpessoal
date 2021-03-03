@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/postagens")
 @CrossOrigin("*")
-
 public class PostagemController {
 
 	@Autowired

@@ -33,8 +33,7 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
-=======
+
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.6.1</version>
@@ -46,7 +45,7 @@
 			<version>2.6.1</version>
 		</dependency>
 		<dependency>
->>>>>>> 8411362 (feat(dependency): Add dependencies swagger)
+
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>

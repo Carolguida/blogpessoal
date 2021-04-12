@@ -21,6 +21,10 @@ public class UsuarioService {
 		if (repository.findByUsuario(usuario.getUsuario()).isPresent()) {
 			return null;
 		}
+		
+		/*if (repository.findByUsuario(usuario.getUsuario()).isPresent() && usuario.getId() == 0) {
+			return null;
+		} Poderia fazer assim: maneira mais simples de resolver o problema de atualizar o usuario*/
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -43,13 +47,27 @@ public class UsuarioService {
 				String authHeader = "Basic " + new String(encodedAuth);
 
 				user.get().setToken(authHeader);
+				user.get().setId(usuario.get().getId());
 				user.get().setNome(usuario.get().getNome());
-				user.get().setSenha(usuario.get().getSenha());
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipoUsuario(usuario.get().getTipoUsuario());
 
 				return user;
 
 			}
 		}
 		return null;
+	}
+	
+	//Método atualizar usuário
+	public Optional<Usuario> AtualizarUsuario(Usuario usuario){
+		
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+	String senhaEncoder = encoder.encode(usuario.getSenha());
+	usuario.setSenha(senhaEncoder);
+
+	return Optional.of(repository.save(usuario));
+	
 	}
 }

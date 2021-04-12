@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity // Faz com que a classe seja interpretada pelo bd como uma tabela.
-@Table(name = "postagens")
+@Table(name = "tb_postagens")
 public class Postagem {
 
 	@Id // Transforma numa chave primária
@@ -39,6 +39,11 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+	
+	
 	// Métodos getters and setters
 	public long getId() {
 		return id;
@@ -79,5 +84,16 @@ public class Postagem {
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
+	
 
 }
